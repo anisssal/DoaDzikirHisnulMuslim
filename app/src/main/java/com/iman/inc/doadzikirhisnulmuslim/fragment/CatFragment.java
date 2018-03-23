@@ -13,10 +13,10 @@ import com.iman.inc.doadzikirhisnulmuslim.R;
  * Created by z on 15/03/18.
  */
 
-public class FragmentHome extends Fragment {
+public class CatFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.home_fragment, container,false);
+        return inflater.inflate(R.layout.fragment_cat, container,false);
     }
 }

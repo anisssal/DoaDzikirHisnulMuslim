@@ -9,9 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.iman.inc.doadzikirhisnulmuslim.adapter.ViewPagerAdapt;
-import com.iman.inc.doadzikirhisnulmuslim.fragment.FragmentCat;
-import com.iman.inc.doadzikirhisnulmuslim.fragment.FragmentFav;
-import com.iman.inc.doadzikirhisnulmuslim.fragment.FragmentHome;
+import com.iman.inc.doadzikirhisnulmuslim.fragment.CatFragment;
+import com.iman.inc.doadzikirhisnulmuslim.fragment.FavFragment;
+import com.iman.inc.doadzikirhisnulmuslim.fragment.HomeFragment;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener , ViewPager.OnPageChangeListener{
     BottomNavigationView bottomNavigationView;
@@ -85,9 +85,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         viewPager= findViewById(R.id.viewPager);
         viewPager.addOnPageChangeListener(this);
         ViewPagerAdapt viewPagerAdapt = new ViewPagerAdapt(getSupportFragmentManager());
-        viewPagerAdapt.addFragment(new FragmentHome());
-        viewPagerAdapt.addFragment(new FragmentCat());
-        viewPagerAdapt.addFragment(new FragmentFav());
+        viewPagerAdapt.addFragment(new HomeFragment());
+        viewPagerAdapt.addFragment(new CatFragment());
+        viewPagerAdapt.addFragment(new FavFragment());
         viewPager.setAdapter(viewPagerAdapt);
 
     }
