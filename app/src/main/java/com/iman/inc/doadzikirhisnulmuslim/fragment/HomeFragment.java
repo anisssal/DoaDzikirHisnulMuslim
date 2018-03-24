@@ -4,14 +4,15 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
+import com.iman.inc.doadzikirhisnulmuslim.FragmentOnActionListener;
 import com.iman.inc.doadzikirhisnulmuslim.R;
-import com.iman.inc.doadzikirhisnulmuslim.adapter.JudulAdapt;
+import com.iman.inc.doadzikirhisnulmuslim.adapter.ListJudulAdapter;
 import com.iman.inc.doadzikirhisnulmuslim.helper.DbHelper;
 import com.iman.inc.doadzikirhisnulmuslim.model.JudulModel;
 
@@ -21,12 +22,15 @@ import java.util.List;
  * Created by z on 15/03/18.
  */
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements AdapterView.OnItemClickListener{
     View v;
     DbHelper dbHelper ;
     Context context;
-    RecyclerView recyclerView;
-    JudulAdapt adapt ;
+    ListView listView;
+    ListJudulAdapter listJudulAdapter;
+    List <JudulModel> listBalik;
+    FragmentOnActionListener fragmentOnActionListener ;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,15 +39,29 @@ public class HomeFragment extends Fragment {
         return v;
     }
 
+    public void setFragmentOnActionListener(FragmentOnActionListener fragmentOnActionListener){
+        this.fragmentOnActionListener = fragmentOnActionListener;
+
+
+    }
+
     private void initView() {
         context=getContext();
         dbHelper = new DbHelper(context);
-        List <JudulModel> listBalik= dbHelper.getAlldata();
-        adapt = new JudulAdapt(listBalik,context);
-        recyclerView = v.findViewById(R.id.recView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(adapt);
+         listBalik= dbHelper.getAlldata();
+        listJudulAdapter = new ListJudulAdapter(listBalik,context);
+        listView = v.findViewById(R.id.recView);
+        listView.setAdapter(listJudulAdapter);
+        listView.setOnItemClickListener(this);
 
+
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Bundle bundle = new Bundle();
+        bundle.putString("doa",listBalik.get(position).getJudul());
+        fragmentOnActionListener.onClickRecyclerd(bundle);
     }
 }
