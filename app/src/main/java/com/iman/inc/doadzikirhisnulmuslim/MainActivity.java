@@ -110,9 +110,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private void addSubFragmentJudul(Bundle bundle){
         fragmentTransaction = fragmentManager.beginTransaction();
         SubFragment subFragment = new SubFragment();
+
+
         subFragment.setArguments(bundle);
-        fragmentTransaction.add(R.id.frame_container,subFragment);
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.frame_container,subFragment);
         fragmentTransaction.commit();
     }
 

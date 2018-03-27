@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
 
     private void initView() {
         context=getContext();
-        dbHelper = new DbHelper(context);
+       dbHelper = DbHelper.getInstance(context.getApplicationContext());
          listBalik= dbHelper.getAlldata();
         listJudulAdapter = new ListJudulAdapter(listBalik,context);
         listView = v.findViewById(R.id.recView);
@@ -61,7 +61,8 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Bundle bundle = new Bundle();
-        bundle.putString("doa",listBalik.get(position).getJudul());
+        bundle.putString("doa",listBalik.get(position).getBagName());
+        bundle.putInt("chapID", listBalik.get(position).getIDBag());
         fragmentOnActionListener.onClickRecyclerd(bundle);
     }
 }
